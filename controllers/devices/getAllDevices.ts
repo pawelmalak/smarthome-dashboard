@@ -1,9 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
+import { DataTool } from '../../utils';
+import { SmartDevice } from '../../typescript/interfaces';
 
-export const getAllDevices = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  res.json({ devices: [{ id: 1, name: 'test' }] });
+export const getAllDevices = (req: Request, res: Response) => {
+  const dataTool = new DataTool<SmartDevice>();
+
+  const data = dataTool.getAll();
+
+  res.json({ devices: data });
 };

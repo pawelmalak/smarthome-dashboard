@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "type": "bulb",
+      "id": "1",
+      "name": "Kitchen Lights",
+      "connectionState": "connected",
+      "isTurnedOn": true,
+      "brightness": 50,
+      "color": "yellow"
+    }
+  ]
+}

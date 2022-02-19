@@ -1,0 +1,39 @@
+.DeviceList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.DeviceList > div {
+  margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+  .DeviceList {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .DeviceList > div {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .DeviceList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .DeviceList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1600px) {
+  .DeviceList {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

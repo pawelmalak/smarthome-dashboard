@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect } from 'react';
-import { Headline, DeviceGrid } from '../components';
+import { Headline, DeviceList } from '../components';
 import { DevicesContext } from '../state';
 
 export const Dashboard = (): JSX.Element => {
@@ -12,7 +12,7 @@ export const Dashboard = (): JSX.Element => {
   return (
     <Fragment>
       <Headline>Devices</Headline>
-      <DeviceGrid devices={devices} />
+      <DeviceList devices={devices} />
     </Fragment>
   );
 };

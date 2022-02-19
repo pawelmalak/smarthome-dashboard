@@ -1,2 +1,3 @@
 export * from './DeviceCard/DeviceCard';
-export * from './DeviceGrid/DeviceGrid';
+export * from './DeviceList/DeviceList';
+export * from './DeviceStatus/DeviceStatus';

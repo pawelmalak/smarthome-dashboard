@@ -1,12 +1,9 @@
 import { createContext, useState } from 'react';
+import {
+  DevicesContext as Context,
+  SmartDevice
+} from '../typescript/interfaces';
 import axios from 'axios';
-
-import { SmartDevice } from '../typescript/interfaces';
-
-interface Context {
-  devices: SmartDevice[];
-  getAllDevices: () => void;
-}
 
 interface Props {
   children: React.ReactNode;

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { InterfaceContext } from '../../../state';
 import { SmartDevice } from '../../../typescript/interfaces';
 import { DeviceStatus } from '..';
 import Icon from '@ailibs/feather-react-ts';
@@ -8,6 +10,8 @@ interface Props {
 }
 
 export const DeviceCard = ({ device }: Props): JSX.Element => {
+  const { showDeviceDetails } = useContext(InterfaceContext);
+
   return (
     <div className={styles.DeviceCard}>
       <div className={styles.DeviceCardBody}>
@@ -19,7 +23,7 @@ export const DeviceCard = ({ device }: Props): JSX.Element => {
         {device.type}
       </div>
 
-      <div className={styles.DeviceCardFooter}>
+      <div className={styles.DeviceCardFooter} onClick={showDeviceDetails}>
         Show details
         <Icon name='arrow-right' size={15} />
       </div>

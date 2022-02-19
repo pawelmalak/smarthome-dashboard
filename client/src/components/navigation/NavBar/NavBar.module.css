@@ -1,0 +1,12 @@
+.NavBar {
+  width: 100%;
+  padding: 20px;
+  background: var(--color-dark);
+  color: var(--color-light);
+  display: flex;
+  justify-content: space-between;
+}
+
+.NavBar a {
+  color: var(--color-green);
+}

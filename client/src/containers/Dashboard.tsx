@@ -4,7 +4,7 @@ import { Headline, Dialog } from '../components/ui';
 import { DevicesContext, InterfaceContext } from '../state';
 
 export const Dashboard = (): JSX.Element => {
-  const { devices, getAllDevices } = useContext(DevicesContext);
+  const { devices, activeDevice, getAllDevices } = useContext(DevicesContext);
   const { deviceDetailsDialog: dialog } = useContext(InterfaceContext);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const Dashboard = (): JSX.Element => {
         <Dialog
           initialPosition={{ x: dialog.position.x, y: dialog.position.y }}
         >
-          <DeviceDetails device={devices[0]} />
+          <DeviceDetails device={activeDevice} />
         </Dialog>
       )}
 

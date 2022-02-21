@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef, useState } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 import { InterfaceContext } from '../../../../state';
 import Icon from '@ailibs/feather-react-ts';
 import interact from 'interactjs';
@@ -51,8 +51,8 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
   return (
     <div
       className={[styles.Dialog, 'draggable'].join(' ')}
-      data-x='0'
-      data-y='0'
+      data-x={`${initialPosition ? initialPosition.x : 0}`}
+      data-y={`${initialPosition ? initialPosition.y : 0}`}
       ref={dialogRef}
     >
       <div className={styles.DialogHeader}>

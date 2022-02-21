@@ -5,13 +5,13 @@ import styles from './App.module.css';
 
 export const App = (): JSX.Element => {
   return (
-    <InterfaceContextProvider>
-      <DevicesContextProvider>
+    <DevicesContextProvider>
+      <InterfaceContextProvider>
         <NavBar />
         <main className={styles.App}>
           <Dashboard />
         </main>
-      </DevicesContextProvider>
-    </InterfaceContextProvider>
+      </InterfaceContextProvider>
+    </DevicesContextProvider>
   );
 };

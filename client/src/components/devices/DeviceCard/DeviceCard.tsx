@@ -23,7 +23,10 @@ export const DeviceCard = ({ device }: Props): JSX.Element => {
         {device.type}
       </div>
 
-      <div className={styles.DeviceCardFooter} onClick={showDeviceDetails}>
+      <div
+        className={styles.DeviceCardFooter}
+        onClick={() => showDeviceDetails(device.id)}
+      >
         Show details
         <Icon name='arrow-right' size={15} />
       </div>

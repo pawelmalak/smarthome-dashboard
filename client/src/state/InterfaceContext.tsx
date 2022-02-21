@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
+import { DevicesContext } from '.';
 import { InterfaceContext as Context } from '../typescript/interfaces';
 
 interface Props {
@@ -11,30 +12,32 @@ export const InterfaceContext = createContext<Context>({
     position: {
       x: 0,
       y: 0
-    }
+    },
+    deviceId: '-1'
   },
-  showDeviceDetails: () => {},
+  showDeviceDetails: (id: string) => {},
   hideDeviceDetails: () => {},
   saveDialogPosition: (x: number, y: number) => {}
 });
 
 export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
+  const { selectDevice } = useContext(DevicesContext);
+
   const [deviceDetailsDialog, setDeviceDetailsDialog] = useState({
     show: false,
     position: {
       x: 0,
       y: 0
-    }
+    },
+    deviceId: '-1'
   });
 
-  useEffect(() => {
-    console.log(deviceDetailsDialog.position);
-  }, [deviceDetailsDialog.position]);
-
-  const showDeviceDetails = () => {
+  const showDeviceDetails = (id: string) => {
+    selectDevice(id);
     setDeviceDetailsDialog({
       ...deviceDetailsDialog,
-      show: true
+      show: true,
+      deviceId: id
     });
   };
 

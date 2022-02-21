@@ -1,0 +1,22 @@
+.DeviceDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.DeviceDetails hr {
+  margin: 20px 5px;
+  border: 1px solid var(--color-grey-light);
+}
+
+.DeviceInfo {
+  list-style: none;
+}
+
+.DeviceInfo span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.DeviceInfo li {
+  display: flex;
+}

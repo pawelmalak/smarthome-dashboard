@@ -11,11 +11,14 @@ interface Props {
 
 export const DevicesContext = createContext<Context>({
   devices: [],
-  getAllDevices: () => {}
+  activeDevice: null,
+  getAllDevices: () => {},
+  selectDevice: (id: string) => {}
 });
 
 export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
   const [devices, setDevices] = useState<SmartDevice[]>([]);
+  const [activeDevice, setActiveDevice] = useState<SmartDevice | null>(null);
 
   const axiosInstance = axios.create({ baseURL: '/api/v1' });
 
@@ -24,9 +27,21 @@ export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
     setDevices(res.data.devices);
   };
 
+  const selectDevice = (id: string): void => {
+    const device = devices.find(d => d.id === id);
+
+    if (device) {
+      setActiveDevice(device);
+    } else {
+      setActiveDevice(null);
+    }
+  };
+
   const context = {
     devices,
-    getAllDevices
+    activeDevice,
+    getAllDevices,
+    selectDevice
   };
 
   return (

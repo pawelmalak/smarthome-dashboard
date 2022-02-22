@@ -3,9 +3,13 @@ import styles from './DeviceStatus.module.css';
 
 interface Props {
   status: SmartDeviceConnectionState;
+  verbose?: boolean;
 }
 
-export const DeviceStatus = ({ status }: Props): JSX.Element => {
+export const DeviceStatus = ({
+  status,
+  verbose = false
+}: Props): JSX.Element => {
   let elementColor = 'var(--color-grey-dark)';
 
   if (status === 'connected') {
@@ -17,10 +21,10 @@ export const DeviceStatus = ({ status }: Props): JSX.Element => {
   return (
     <div className={styles.Status} style={{ color: elementColor }}>
       <div
-        className={styles.VisualStatus}
+        className={[styles.VisualStatus, verbose && styles.WithText].join(' ')}
         style={{ backgroundColor: elementColor }}
       ></div>
-      <p>{status}</p>
+      {verbose && <p>{status}</p>}
     </div>
   );
 };

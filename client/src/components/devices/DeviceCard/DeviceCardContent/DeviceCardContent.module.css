@@ -1,0 +1,14 @@
+.DeviceCardContent {
+  color: var(--color-dark);
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.DeviceCardContent span {
+  font-weight: normal;
+  font-size: 17px;
+  margin-left: 3px;
+}

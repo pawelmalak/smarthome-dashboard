@@ -64,7 +64,7 @@ export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
     setActiveDevice(null);
   };
 
-  const context = {
+  const context: Context = {
     devices,
     activeDevice,
     getAllDevices,

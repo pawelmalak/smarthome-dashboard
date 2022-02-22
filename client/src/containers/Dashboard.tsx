@@ -1,11 +1,13 @@
 import { Fragment, useContext, useEffect } from 'react';
 import { DeviceList, DeviceDetails } from '../components';
-import { Headline, Dialog } from '../components/ui';
+import { Headline, Dialog, SelectInput } from '../components/ui';
 import { DevicesContext, InterfaceContext } from '../state';
+import { SmartDeviceType } from '../typescript/types';
 
 export const Dashboard = (): JSX.Element => {
   const { devices, activeDevice, getAllDevices } = useContext(DevicesContext);
-  const { deviceDetailsDialog: dialog } = useContext(InterfaceContext);
+  const { deviceDetailsDialog: dialog, filterDevices } =
+    useContext(InterfaceContext);
 
   useEffect(() => {
     getAllDevices();
@@ -21,7 +23,28 @@ export const Dashboard = (): JSX.Element => {
         </Dialog>
       )}
 
-      <Headline>Devices</Headline>
+      <Headline
+        primaryText='Devices'
+        secondaryContent={
+          <SelectInput
+            defaultOption={{ text: 'All Devices', value: 'null' }}
+            options={[
+              { text: 'Smart Bulbs', value: 'bulb' },
+              { text: 'Smart Outlets', value: 'outlet' },
+              { text: 'Temperature Sensors', value: 'temperatureSensor' }
+            ]}
+            handler={(type: string) => {
+              if (type !== 'null') {
+                filterDevices(type as SmartDeviceType);
+              } else {
+                console.log('clear');
+                filterDevices(null);
+              }
+            }}
+          />
+        }
+      />
+
       <DeviceList devices={devices} />
     </Fragment>
   );

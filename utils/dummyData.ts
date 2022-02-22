@@ -1,5 +1,6 @@
 import { DataTool } from '.';
 import {
+  SmartBulb,
   SmartDevice,
   SmartOutlet,
   SmartTemperatureSensor
@@ -30,6 +31,14 @@ export const dummyData = () => {
       connectionState:
         connectionStates[Math.floor(Math.random() * connectionStates.length)]
     };
+
+    // generate data for smart outlet
+    if (d.type === 'bulb') {
+      tmpDevice = {
+        ...tmpDevice,
+        brightness: randomNumber(0, 100)
+      } as SmartBulb;
+    }
 
     // generate data for smart outlet
     if (d.type === 'outlet') {

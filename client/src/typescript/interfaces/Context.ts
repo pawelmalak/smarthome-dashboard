@@ -1,4 +1,5 @@
-import { SmartDevice } from '.';
+import { Filter, SmartDevice } from '.';
+import { SmartDeviceType } from '../types';
 
 export interface DevicesContext {
   devices: SmartDevice[];
@@ -17,7 +18,11 @@ export interface InterfaceContext {
     };
     deviceId: string;
   };
+  dataFilters: {
+    devices: Filter<keyof SmartDevice>;
+  };
   showDeviceDetails: (id: string) => void;
   hideDeviceDetails: () => void;
   saveDialogPosition: (x: number, y: number) => void;
+  filterDevices: (type: SmartDeviceType | null) => void;
 }

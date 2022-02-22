@@ -1,6 +1,11 @@
 import { createContext, useState, useContext } from 'react';
 import { DevicesContext } from '.';
-import { InterfaceContext as Context } from '../typescript/interfaces';
+import {
+  Filter,
+  InterfaceContext as Context,
+  SmartDevice
+} from '../typescript/interfaces';
+import { SmartDeviceType } from '../typescript/types';
 
 interface Props {
   children: React.ReactNode;
@@ -15,9 +20,17 @@ export const InterfaceContext = createContext<Context>({
     },
     deviceId: '-1'
   },
+  dataFilters: {
+    devices: {
+      enabled: false,
+      field: 'type',
+      value: ''
+    }
+  },
   showDeviceDetails: (id: string) => {},
   hideDeviceDetails: () => {},
-  saveDialogPosition: (x: number, y: number) => {}
+  saveDialogPosition: (x: number, y: number) => {},
+  filterDevices: (type: SmartDeviceType | null) => {}
 });
 
 export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
@@ -32,7 +45,13 @@ export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
     deviceId: '-1'
   });
 
-  const showDeviceDetails = (id: string) => {
+  const [deviceFilter, setDeviceFilter] = useState<Filter<keyof SmartDevice>>({
+    enabled: false,
+    field: 'type',
+    value: ''
+  });
+
+  const showDeviceDetails = (id: string): void => {
     selectDevice(id);
     setDeviceDetailsDialog({
       ...deviceDetailsDialog,
@@ -41,25 +60,45 @@ export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
     });
   };
 
-  const hideDeviceDetails = () => {
+  const hideDeviceDetails = (): void => {
     setDeviceDetailsDialog({
       ...deviceDetailsDialog,
       show: false
     });
   };
 
-  const saveDialogPosition = (x: number, y: number) => {
+  const saveDialogPosition = (x: number, y: number): void => {
     setDeviceDetailsDialog({
       ...deviceDetailsDialog,
       position: { x, y }
     });
   };
 
-  const context = {
+  const filterDevices = (type: SmartDeviceType | null): void => {
+    if (!type) {
+      setDeviceFilter({
+        ...deviceFilter,
+        enabled: false,
+        value: ''
+      });
+    } else {
+      setDeviceFilter({
+        ...deviceFilter,
+        enabled: true,
+        value: type
+      });
+    }
+  };
+
+  const context: Context = {
     deviceDetailsDialog,
+    dataFilters: {
+      devices: deviceFilter
+    },
     showDeviceDetails,
     hideDeviceDetails,
-    saveDialogPosition
+    saveDialogPosition,
+    filterDevices
   };
 
   return (

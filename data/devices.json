@@ -2,12 +2,41 @@
   "data": [
     {
       "type": "bulb",
-      "id": "1",
+      "id": "5f3736",
       "name": "Kitchen Lights",
       "connectionState": "connected",
       "isTurnedOn": true,
       "brightness": 50,
       "color": "yellow"
+    },
+    {
+      "type": "outlet",
+      "id": "8bb2e5",
+      "name": "Office Outlet",
+      "connectionState": "disconnected",
+      "isTurnedOn": true,
+      "powerConsumption": 61
+    },
+    {
+      "type": "temperatureSensor",
+      "id": "f05537",
+      "name": "Bathroom Temperature",
+      "connectionState": "poorConnection",
+      "temperature": 29
+    },
+    {
+      "type": "temperatureSensor",
+      "id": "7f532e",
+      "name": "Kitchen Temperature",
+      "connectionState": "disconnected",
+      "temperature": 26
+    },
+    {
+      "type": "temperatureSensor",
+      "id": "87cab9",
+      "name": "Kids Room Temperature",
+      "connectionState": "connected",
+      "temperature": 28
     }
   ]
 }

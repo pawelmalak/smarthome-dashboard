@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import {
   DevicesContext as Context,
   SmartDevice
@@ -13,17 +13,40 @@ export const DevicesContext = createContext<Context>({
   devices: [],
   activeDevice: null,
   getAllDevices: () => {},
-  selectDevice: (id: string) => {}
+  selectDevice: (id: string) => {},
+  clearDevice: () => {}
 });
 
 export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
   const [devices, setDevices] = useState<SmartDevice[]>([]);
   const [activeDevice, setActiveDevice] = useState<SmartDevice | null>(null);
 
-  const axiosInstance = axios.create({ baseURL: '/api/v1' });
+  const apiBaseUrl = '/api/v1/devices';
+  const axiosInstance = axios.create({ baseURL: apiBaseUrl });
+
+  // listen for device updates
+  useEffect(() => {
+    const socket = new WebSocket(`ws://localhost:5000${apiBaseUrl}/refresh`);
+
+    socket.addEventListener('message', e => {
+      const data = JSON.parse(e.data) as SmartDevice[];
+
+      setDevices(data);
+    });
+
+    return () => socket.close();
+  }, []);
+
+  // check if active device was updated
+  useEffect(() => {
+    if (activeDevice) {
+      const device = devices.find(d => d.id === activeDevice.id) as SmartDevice;
+      setActiveDevice(device);
+    }
+  }, [devices]);
 
   const getAllDevices = async (): Promise<void> => {
-    const res = await axiosInstance.get<{ devices: SmartDevice[] }>('/devices');
+    const res = await axiosInstance.get<{ devices: SmartDevice[] }>('/');
     setDevices(res.data.devices);
   };
 
@@ -37,11 +60,16 @@ export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
     }
   };
 
+  const clearDevice = (): void => {
+    setActiveDevice(null);
+  };
+
   const context = {
     devices,
     activeDevice,
     getAllDevices,
-    selectDevice
+    selectDevice,
+    clearDevice
   };
 
   return (

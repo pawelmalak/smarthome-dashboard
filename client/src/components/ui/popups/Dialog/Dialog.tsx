@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef } from 'react';
-import { InterfaceContext } from '../../../../state';
+import { InterfaceContext, DevicesContext } from '../../../../state';
 import Icon from '@ailibs/feather-react-ts';
 import interact from 'interactjs';
 import styles from './Dialog.module.css';
@@ -13,10 +13,16 @@ interface Props {
 }
 
 export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
+  const { clearDevice } = useContext(DevicesContext);
   const { hideDeviceDetails, saveDialogPosition } =
     useContext(InterfaceContext);
 
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  const closeDialog = (): void => {
+    hideDeviceDetails();
+    clearDevice();
+  };
 
   useEffect(() => {
     interact('.draggable').draggable({
@@ -29,6 +35,8 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
 
           target.dataset.x = x.toString();
           target.dataset.y = y.toString();
+
+          // saveDialogPosition(x, y);
         },
         end({ target, dx, dy }) {
           const x = (parseFloat(target.dataset.x) || 0) + dx;
@@ -57,7 +65,7 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
     >
       <div className={styles.DialogHeader}>
         <span>Device details</span>
-        <Icon name='x' size={18} onClick={hideDeviceDetails} />
+        <Icon name='x' size={18} onClick={closeDialog} />
       </div>
       <div className={styles.DialogBody}>{children}</div>
     </div>

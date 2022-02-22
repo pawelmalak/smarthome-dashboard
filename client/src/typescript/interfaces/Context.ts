@@ -5,6 +5,7 @@ export interface DevicesContext {
   activeDevice: SmartDevice | null;
   getAllDevices: () => void;
   selectDevice: (id: string) => void;
+  clearDevice: () => void;
 }
 
 export interface InterfaceContext {

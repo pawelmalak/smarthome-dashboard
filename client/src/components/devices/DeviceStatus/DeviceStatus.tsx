@@ -11,11 +11,13 @@ export const DeviceStatus = ({
   verbose = false
 }: Props): JSX.Element => {
   let elementColor = 'var(--color-grey-dark)';
+  let parsedStatus: String = status;
 
   if (status === 'connected') {
     elementColor = 'var(--color-green)';
   } else if (status === 'poorConnection') {
     elementColor = 'var(--color-orange)';
+    parsedStatus = 'poor connection';
   }
 
   return (
@@ -24,7 +26,7 @@ export const DeviceStatus = ({
         className={[styles.VisualStatus, verbose && styles.WithText].join(' ')}
         style={{ backgroundColor: elementColor }}
       ></div>
-      {verbose && <p>{status}</p>}
+      {verbose && <p>{parsedStatus}</p>}
     </div>
   );
 };

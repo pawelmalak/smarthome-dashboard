@@ -1,7 +1,19 @@
+import { ReactNode } from 'react';
+import styles from './Headline.module.css';
+
 interface Props {
-  children: React.ReactNode;
+  primaryText: ReactNode;
+  secondaryContent?: ReactNode;
 }
 
-export const Headline = ({ children }: Props): JSX.Element => {
-  return <h2>{children}</h2>;
+export const Headline = ({
+  primaryText,
+  secondaryContent
+}: Props): JSX.Element => {
+  return (
+    <div className={styles.Headline}>
+      <h2>{primaryText}</h2>
+      {secondaryContent}
+    </div>
+  );
 };

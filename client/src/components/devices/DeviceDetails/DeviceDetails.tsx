@@ -1,5 +1,14 @@
-import { SmartBulb, SmartDevice } from '../../../typescript/interfaces';
-import { SmartBulbDetails } from '.';
+import {
+  SmartBulb,
+  SmartDevice,
+  SmartOutlet,
+  SmartTemperatureSensor
+} from '../../../typescript/interfaces';
+import {
+  SmartBulbDetails,
+  SmartOutletDetails,
+  TemperatureSensorDetails
+} from '.';
 import { DeviceStatus } from '..';
 import styles from './DeviceDetails.module.css';
 
@@ -15,8 +24,12 @@ export const DeviceDetails = ({ device }: Props): JSX.Element => {
 
     if (device.type === 'bulb') {
       deviceType = <SmartBulbDetails device={device as SmartBulb} />;
+    } else if (device.type === 'outlet') {
+      deviceType = <SmartOutletDetails device={device as SmartOutlet} />;
     } else {
-      deviceType = <h3>other</h3>;
+      deviceType = (
+        <TemperatureSensorDetails device={device as SmartTemperatureSensor} />
+      );
     }
 
     return (
@@ -33,7 +46,7 @@ export const DeviceDetails = ({ device }: Props): JSX.Element => {
           </li>
           <li>
             <span>Connection status: </span>
-            <DeviceStatus status={device.connectionState} />
+            <DeviceStatus status={device.connectionState} verbose />
           </li>
         </ul>
 

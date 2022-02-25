@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import {
+  SmartBulb,
   SmartDevice,
   SmartOutlet,
   SmartTemperatureSensor
@@ -11,27 +11,24 @@ interface Props {
 }
 
 export const DeviceCardContent = ({ device }: Props): JSX.Element => {
-  let contentElement = <></>;
+  let value = -1;
+  let unit = 'N/A';
 
   if (device.type === 'temperatureSensor') {
-    const { temperature } = device as SmartTemperatureSensor;
-
-    contentElement = (
-      <Fragment>
-        {temperature}
-        <span>°C</span>
-      </Fragment>
-    );
+    value = (device as SmartTemperatureSensor).temperature;
+    unit = '°C';
   } else if (device.type === 'outlet') {
-    const { powerConsumption } = device as SmartOutlet;
-
-    contentElement = (
-      <Fragment>
-        {powerConsumption}
-        <span>W</span>
-      </Fragment>
-    );
+    value = (device as SmartOutlet).powerConsumption;
+    unit = 'W';
+  } else if (device.type === 'bulb') {
+    value = (device as SmartBulb).brightness;
+    unit = '%';
   }
 
-  return <div className={styles.DeviceCardContent}>{contentElement}</div>;
+  return (
+    <div className={styles.DeviceCardContent}>
+      {value}
+      <span>{unit}</span>
+    </div>
+  );
 };

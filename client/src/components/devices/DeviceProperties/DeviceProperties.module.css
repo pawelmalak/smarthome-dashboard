@@ -1,0 +1,40 @@
+.DeviceProperties {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.DeviceProperties div {
+  min-width: 150px;
+  display: flex;
+}
+
+.DeviceProperties div span:first-child {
+  font-weight: bold;
+}
+
+.DeviceProperties div span:first-child::after {
+  content: ':';
+  margin-right: 10px;
+}
+
+@media (min-width: 600px) {
+  .DeviceProperties {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .DeviceProperties div {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .DeviceProperties div span:first-child {
+    margin-bottom: 2px;
+  }
+
+  .DeviceProperties div span:first-child::after {
+    content: none;
+  }
+}

@@ -1,6 +1,7 @@
 .DeviceDetails {
   display: flex;
   flex-direction: column;
+  color: var(--color-dark);
 }
 
 .DeviceDetails hr {

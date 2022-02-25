@@ -14,7 +14,7 @@ interface Props {
 
 export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
   const { clearDevice } = useContext(DevicesContext);
-  const { hideDeviceDetails, saveDialogPosition } =
+  const { hideDeviceDetails, saveDialogPosition, inMobileView } =
     useContext(InterfaceContext);
 
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -27,6 +27,7 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
   useEffect(() => {
     interact('.interactable')
       .draggable({
+        enabled: !inMobileView,
         listeners: {
           move({ target, dx, dy }) {
             const x = (parseFloat(target.dataset.x) || 0) + dx;
@@ -46,6 +47,7 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
         }
       })
       .resizable({
+        enabled: !inMobileView,
         edges: { top: false, left: true, bottom: true, right: true },
         modifiers: [
           interact.modifiers.restrictSize({ min: { width: 300, height: 350 } })
@@ -67,7 +69,11 @@ export const Dialog = ({ children, initialPosition }: Props): JSX.Element => {
           }
         }
       });
-  }, []);
+
+    if (inMobileView) {
+      saveDialogPosition(0, 0);
+    }
+  }, [inMobileView]);
 
   useEffect(() => {
     if (initialPosition) {

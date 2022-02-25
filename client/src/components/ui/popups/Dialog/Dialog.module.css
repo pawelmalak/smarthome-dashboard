@@ -6,6 +6,7 @@
   left: 0;
   top: 60px;
   animation: fadeIn 0.2s;
+  touch-action: none;
 }
 
 .DialogHeader {

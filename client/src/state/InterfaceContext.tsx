@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import { DevicesContext } from '.';
 import {
   Filter,
@@ -12,6 +12,7 @@ interface Props {
 }
 
 export const InterfaceContext = createContext<Context>({
+  inMobileView: false,
   deviceDetailsDialog: {
     show: false,
     position: {
@@ -36,6 +37,8 @@ export const InterfaceContext = createContext<Context>({
 export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
   const { selectDevice } = useContext(DevicesContext);
 
+  const [inMobileView, setInMobileView] = useState(false);
+
   const [deviceDetailsDialog, setDeviceDetailsDialog] = useState({
     show: false,
     position: {
@@ -50,6 +53,18 @@ export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
     field: 'type',
     value: ''
   });
+
+  useEffect(() => {
+    setInMobileView(() => window.innerWidth <= 600);
+
+    const listener = (e: any) => {
+      setInMobileView(() => window.innerWidth <= 600);
+    };
+
+    window.addEventListener('resize', listener);
+
+    return () => window.removeEventListener('resize', listener);
+  }, []);
 
   const showDeviceDetails = (id: string): void => {
     selectDevice(id);
@@ -91,6 +106,7 @@ export const InterfaceContextProvider = ({ children }: Props): JSX.Element => {
   };
 
   const context: Context = {
+    inMobileView,
     deviceDetailsDialog,
     dataFilters: {
       devices: deviceFilter

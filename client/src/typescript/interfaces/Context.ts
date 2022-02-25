@@ -10,6 +10,7 @@ export interface DevicesContext {
 }
 
 export interface InterfaceContext {
+  inMobileView: boolean;
   deviceDetailsDialog: {
     show: boolean;
     position: {

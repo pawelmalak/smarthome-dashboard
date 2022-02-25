@@ -7,6 +7,9 @@
 .DeviceProperties div {
   min-width: 150px;
   display: flex;
+  background-color: var(--color-grey-light);
+  border-radius: 2px;
+  padding: 5px;
 }
 
 .DeviceProperties div span:first-child {

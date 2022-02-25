@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "rootDir": "./",
+    "outDir": "build",
+    "rootDir": ".",
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["client"]
 }

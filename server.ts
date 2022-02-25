@@ -1,3 +1,4 @@
+import { join } from 'path';
 import express from 'express';
 import { config } from 'dotenv';
 import expressWs from 'express-ws';
@@ -12,8 +13,15 @@ config({ path: 'config/.env' });
 // config app
 const PORT = process.env.PORT || 5000;
 const { app } = expressWs(express());
+app.use(express.json());
+app.use(express.static(join(__dirname, '../public')));
 
-// setup routes
+// serve client app
+app.get(/^\/(?!api)/, (req, res) => {
+  res.sendFile('public/index.html');
+});
+
+// setup routes for api
 const apiBasePath = '/api/v1';
 
 app.use(`${apiBasePath}/devices`, devicesRouter);

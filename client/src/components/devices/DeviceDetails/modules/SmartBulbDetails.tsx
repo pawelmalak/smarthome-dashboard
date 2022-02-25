@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { DeviceProperties } from '../../';
+import { DeviceProperties } from '../..';
 import { SmartBulb } from '../../../../typescript/interfaces';
 
 interface Props {

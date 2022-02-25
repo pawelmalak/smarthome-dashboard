@@ -37,6 +37,15 @@
       "name": "Kids Room Temperature",
       "connectionState": "connected",
       "temperature": 28
+    },
+    {
+      "type": "bulb",
+      "id": "3d809d",
+      "name": "Living Room Lights",
+      "connectionState": "connected",
+      "isTurnedOn": true,
+      "brightness": 50,
+      "color": "white"
     }
   ]
 }

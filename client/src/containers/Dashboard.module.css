@@ -1,0 +1,9 @@
+.Dashboard {
+  padding-top: 60px;
+}
+
+@media (min-width: 600px) {
+  .Dashboard {
+    padding-top: 0;
+  }
+}

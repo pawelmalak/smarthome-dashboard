@@ -5,8 +5,15 @@
   color: var(--color-light);
   display: flex;
   justify-content: space-between;
+  position: fixed;
 }
 
 .NavBar a {
   color: var(--color-green);
+}
+
+@media (min-width: 600px) {
+  .NavBar {
+    position: static;
+  }
 }

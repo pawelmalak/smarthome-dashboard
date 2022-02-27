@@ -11,7 +11,7 @@ export const TemperatureSensorDetails = ({ device }: Props): JSX.Element => {
     <Fragment>
       <DeviceProperties
         headers={['Temperature']}
-        data={[`${device.temperature}W`]}
+        data={[`${device.temperature}°C`]}
       />
     </Fragment>
   );

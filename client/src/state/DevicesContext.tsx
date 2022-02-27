@@ -26,7 +26,14 @@ export const DevicesContextProvider = ({ children }: Props): JSX.Element => {
 
   // listen for device updates
   useEffect(() => {
-    const socket = new WebSocket(`ws://localhost:5000${apiBaseUrl}/refresh`);
+    const socketProtocol =
+      window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
+    const socketUrl = /localhost/.test(window.location.host)
+      ? `ws://localhost:5000${apiBaseUrl}/refresh`
+      : `${socketProtocol}//${window.location.host}${apiBaseUrl}/refresh`;
+
+    const socket = new WebSocket(socketUrl);
 
     socket.addEventListener('message', e => {
       const data = JSON.parse(e.data) as SmartDevice[];
